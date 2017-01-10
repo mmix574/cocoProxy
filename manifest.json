@@ -1,0 +1,35 @@
+{
+  "manifest_version": 2,
+
+  "name": "cocoProxy",
+  "description": "an simply and powerful Proxy Control Manager",
+  "version": "1.2",
+
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_popup": "popup.html"
+  },
+
+  "permissions": [
+    "bookmarks",
+    "proxy",
+    "webRequest",
+    "storage"
+  ],
+  "content_scripts": [ {  
+          "exclude_globs": [  ],  
+          "include_globs": [ "*" ],  
+          "js": [ "inject.js" ],  
+          "matches": [ "http://*/*", "https://*/*" ],  
+          "run_at": "document_end"  
+   } ], 
+   "web_accessible_resources": [
+      "images/my-awesome-image1.png",
+      "images/my-amazing-icon1.png",
+      "style/double-rainbow.css",
+      "script/double-rainbow.js",
+      "includeme.js",
+      "popup.js"
+    ],
+    "options_page": "option.html"
+}
