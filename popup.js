@@ -58,12 +58,12 @@
    //        function() {});
 
 
-	var config = {
-	    mode: "direct",
-	  };
-	  chrome.proxy.settings.set(
-	      {value: config, scope: 'regular'},
-	      function() {});
+	// var config = {
+	//     mode: "direct",
+	//   };
+	//   chrome.proxy.settings.set(
+	//       {value: config, scope: 'regular'},
+	//       function() {});
       
 
 
@@ -106,6 +106,11 @@
         mode: "fixed_servers",
         rules: {
           proxyForHttp: {
+            scheme: "socks5",
+            host: "127.0.0.1",
+            port:1080
+          },
+          proxyForHttps: {
             scheme: "socks5",
             host: "127.0.0.1",
             port:1080

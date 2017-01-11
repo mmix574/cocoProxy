@@ -19,17 +19,14 @@
   "content_scripts": [ {  
           "exclude_globs": [  ],  
           "include_globs": [ "*" ],  
-          "js": [ "inject.js" ],  
+          "js": [ "content_script.js" ,"js/jquery-3.1.1.js"],  
           "matches": [ "http://*/*", "https://*/*" ],  
           "run_at": "document_end"  
    } ], 
    "web_accessible_resources": [
-      "images/my-awesome-image1.png",
-      "images/my-amazing-icon1.png",
-      "style/double-rainbow.css",
-      "script/double-rainbow.js",
       "includeme.js",
-      "popup.js"
+      "popup.js",
+      "css/content_css.css"
     ],
     "options_page": "option.html"
 }
