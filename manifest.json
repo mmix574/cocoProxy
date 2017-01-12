@@ -16,7 +16,7 @@
     "webRequest",
     "storage",
     "debugger" ,
-    "http://*/*", "https://*/*", "ftp://*/*",
+    "http://*/*", "https://*/*", "ftp://*/*"
   ],
   "content_scripts": [ {  
           "exclude_globs": [  ],  
