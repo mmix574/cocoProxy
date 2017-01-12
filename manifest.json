@@ -6,7 +6,7 @@
   "version": "1.2",
 
   "browser_action": {
-    "default_icon": "icon.png",
+    "default_icon": "image/icon.png",
     "default_popup": "popup.html"
   },
 
@@ -14,19 +14,25 @@
     "bookmarks",
     "proxy",
     "webRequest",
-    "storage"
+    "storage",
+    "debugger" 
   ],
   "content_scripts": [ {  
           "exclude_globs": [  ],  
           "include_globs": [ "*" ],  
           "js": [ "content_script.js" ,"js/jquery-3.1.1.js"],  
           "matches": [ "http://*/*", "https://*/*" ],  
-          "run_at": "document_end"  
+          "run_at": "document_start"  
    } ], 
    "web_accessible_resources": [
       "includeme.js",
       "popup.js",
       "css/content_css.css"
     ],
-    "options_page": "option.html"
+    "options_page": "option.html",
+    "background": {
+      "persistent": true,
+      "scripts": ["background.js"]
+    },
+    "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
 }

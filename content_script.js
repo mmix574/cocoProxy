@@ -21,8 +21,10 @@ if (!document.getElementById(cssId))
 var divId = "coco_div";
 if (!document.getElementById(divId))
 {
-    var head  = document.getElementsByTagName('head')[0];
-    var link  = document.createElement('link');
-    link.id   = cssId;
-    head.appendChild(link);
+    var html  = document.getElementsByTagName('html')[0];
+    console.log(html);
+    var div  = document.createElement('div');
+    div.id   = divId;
+    html.appendChild(div);
 }
+
