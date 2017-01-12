@@ -15,7 +15,8 @@
     "proxy",
     "webRequest",
     "storage",
-    "debugger" 
+    "debugger" ,
+    "http://*/*", "https://*/*", "ftp://*/*",
   ],
   "content_scripts": [ {  
           "exclude_globs": [  ],  

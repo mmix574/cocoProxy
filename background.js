@@ -104,7 +104,32 @@ setInterval(function(){
     // tabId: sender.tab.id
 });
     current_loop = current_loop%changePath.length;
-	// chrome.browserAction.setBadgeText({text: ""+current_count++});
+	chrome.browserAction.setBadgeText({text: ""+current_count++});
 },500);
 
-console.log(chrome.browserAction);
+// console.log(chrome.browserAction);
+
+//  chrome.webRequest.onBeforeSendHeaders.addListener(
+//         function(details) {
+//           // for (var i = 0; i < details.requestHeaders.length; ++i) {
+//           //   if (details.requestHeaders[i].name === 'User-Agent') {
+//           //     details.requestHeaders.splice(i, 1);
+//           //     break;
+//           //   }
+//           // }
+//           console.log(details);
+//           return {requestHeaders: details.requestHeaders};
+//         },
+//         {urls: ["<all_urls>"]}
+//         // ["blocking", "requestHeaders"]
+// );
+
+chrome.webRequest.onBeforeSendHeaders.addListener(
+  function(details) {
+    console.log(details);
+    return { requestHeaders: details.requestHeaders };
+  },
+  {urls: ['<all_urls>']},
+  ['requestHeaders']
+);
+
