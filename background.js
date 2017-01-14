@@ -83,6 +83,19 @@
 // 	chrome.runtime,sendMessage();
 // },1000);
 
+var global_config = {
+	// default settings
+	proxy:"direct"
+};
+
+var configHandler = {
+	saveConfig:function(){
+
+	}
+	getConfig:function(){
+		
+	}
+};
 
 var proxyhandler = {
 	changeProxyMode: function(way) {

@@ -1,4 +1,3 @@
-
 var background = {
     init:function(){
       this.bindMessageAction();
@@ -14,6 +13,14 @@ var background = {
       chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
         console.log("get some message form background.js");
       });
+    },
+    setProxy:function(way){
+       chrome.runtime.sendMessage({proxy:way},function(callback){
+          console.log(callback);
+       });
+    },
+    getProxy:function(callback){
+        chrome.runtime.sendMessage("proxy",callback);
     }
 };
 
@@ -39,7 +46,7 @@ var pageBehavior = {
     var btns = document.querySelectorAll(".btn");
     for (var i = 0; i < btns.length; i++) {
       btns[i].addEventListener("click", function() {
-        changeProxyMode(this.id);
+        background.setProxy(this.id);
         that.setBtnActive(this.id);
       });
     }
@@ -54,20 +61,16 @@ for (var i = 0; i < 20; i++) {
   pageBehavior.log("hello world"+i);
 }
   
+var page = {
+    render:function(config){
+
+    }
+};
+
+
 function init() {
   pageBehavior.init();
   background.init();
-
-  // chrome.runtime.sendMessage("config", function(response) {
-  //   console.log(response);
-  // });
-  // chrome.runtime.sendMessage("log", function(response) {
-  //   console.log(response);
-  // });
-  chrome.runtime.sendMessage({proxy:"shadowsocks"}, function(response) {
-    console.log(response);
-  });
 }
 
 init();
-
