@@ -84,7 +84,6 @@
 // },1000);
 
 
-
 var proxyhandler = {
 	changeProxyMode: function(way) {
 		switch (way) {

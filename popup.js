@@ -1,11 +1,19 @@
 
 var background = {
+    init:function(){
+      this.bindMessageAction();
+    },
     message:function(request,callback){
         if(callback instanceof Function){
           chrome.runtime.sendMessage(request,callback);
         }else{
           chrome.runtime.sendMessage(request);
         }
+    },
+    bindMessageAction:function(){
+      chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
+        console.log("get some message form background.js");
+      });
     }
 };
 
@@ -24,7 +32,7 @@ var pageBehavior = {
   log: function(message) {
     var div_console = document.querySelector("#console");
     var output_message = "[" + new Date().toLocaleTimeString() + "] " + message;
-    div_console.innerHTML = output_message;
+    div_console.innerHTML += output_message+"<br/>";
   },
   bindBtnAction: function() {
     var that = this;
@@ -39,16 +47,16 @@ var pageBehavior = {
 }
 
 pageBehavior.log("load ready");
-// chrome.runtime.sendMessage("hello world",function(response){
-//   console.log(response);
-// });
+pageBehavior.log("load ready+1");
+pageBehavior.log("load ready addListener shadowsocs ss");
 
-// chrome.runtime.onMessage.addListener(function(request,sender,sendResponse){
-//   console.log(sender);
-// });
-
-function onPageInit() {
+for (var i = 0; i < 20; i++) {
+  pageBehavior.log("hello world"+i);
+}
+  
+function init() {
   pageBehavior.init();
+  background.init();
 
   // chrome.runtime.sendMessage("config", function(response) {
   //   console.log(response);
@@ -61,10 +69,5 @@ function onPageInit() {
   });
 }
 
-chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
-
-});
-
-
-onPageInit();
+init();
 
