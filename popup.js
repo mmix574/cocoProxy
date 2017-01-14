@@ -183,8 +183,6 @@ function init() {
       setBtnActive(this.id);
     });
   }
-
-
 }
 
 function changeProxyMode(way) {
@@ -209,13 +207,33 @@ function changeProxyMode(way) {
 function setBtnActive(btnid) {
   var btns = document.querySelectorAll(".btn");
   for (var i = 0; i < btns.length; i++) {
-      btns[i].classList.remove("btn_selected");
+    btns[i].classList.remove("btn_selected");
   }
-  var btn = document.querySelector("#"+btnid);
+  var btn = document.querySelector("#" + btnid);
   btn.classList.add("btn_selected");
 }
 
-function log(message){
-  
+function log(message) {
 
 }
+
+var storage = {
+  test:function(){
+    console.log("inner call");
+  }
+}
+
+chrome.storage.sync.set({
+  "123": "456",
+  "1234": "5678"
+}, function() {
+
+});
+
+chrome.storage.sync.get(
+  "123",
+  function(items) {
+    console.log(items);
+  });
+
+storage.test();
