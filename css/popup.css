@@ -1,0 +1,27 @@
+<style type="text/css">
+	*{
+		font-family: "Microsoft YaHei",Arial,Helvetica,sans-serif;
+	}
+	body{
+		height: 300px;
+		width: 230px;
+		padding: 0;
+		margin: 0;
+		background-color: #E1E1E1;
+	}
+	.button_warper{
+		text-align: center;
+		padding: 5px;
+	}
+	.btn{
+		width: 100px;
+		background-color: #FFFFFF;
+		border-radius: 4px;
+	}
+	button:focus{
+		outline: none;
+	}
+	.btn_selected{
+		background-color: #5cb85c;
+	}	
+</style>

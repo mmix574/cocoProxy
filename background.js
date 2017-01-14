@@ -35,77 +35,21 @@ chrome.bookmarks.onCreated.addListener(function(callback) {
 
 
 
-/**allow to access
-	Object
-Event
-:
-Event()
-app
-:
-Object
-bookmarks
-:
-Object
-browserAction
-:
-Object
-csi
-:
-()
-debugger
-:
-Object
-extension
-:
-Object
-i18n
-:
-Object
-loadTimes
-:
-()
-management
-:
-Object
-permissions
-:
-Object
-proxy
-:
-Object
-runtime
-:
-Object
-storage
-:
-Object
-tabs
-:
-Object
-webRequest
-:
-Object
-windows
-:
-Object
-__proto__
-:
-Object
- */
-var changePath = ["/image/mushroom_green.png", "/image/mushroom_red.png"];
+ 
+// var changePath = ["/image/mushroom_green.png", "/image/mushroom_red.png"];
 
-var current_loop = 0;
-var current_count = 0;
-setInterval(function() {
-	chrome.browserAction.setIcon({
-		path: changePath[current_loop++],
-		// tabId: sender.tab.id
-	});
-	current_loop = current_loop % changePath.length;
-	chrome.browserAction.setBadgeText({
-		text: "" + current_count++
-	});
-}, 500);
+// var current_loop = 0;
+// var current_count = 0;
+// setInterval(function() {
+// 	chrome.browserAction.setIcon({
+// 		path: changePath[current_loop++],
+// 		// tabId: sender.tab.id
+// 	});
+// 	current_loop = current_loop % changePath.length;
+// 	chrome.browserAction.setBadgeText({
+// 		text: "" + current_count++
+// 	});
+// }, 500);
 
 // console.log(chrome.browserAction);
 
