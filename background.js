@@ -91,7 +91,7 @@ var global_config = {
 var configHandler = {
 	saveConfig:function(){
 
-	}
+	},
 	getConfig:function(){
 		
 	}
@@ -146,7 +146,6 @@ var proxyhandler = {
 
 /*response all the message*/
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
-	console.log("what does the fox say" + request);
 	switch (request) {
 		case "config":
 			console.log("config");
@@ -155,7 +154,7 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
 			console.log("log");
 			break;
 		case "proxy":
-			console.log("proxy");
+			sendResponse(global_config.proxy);
 			break;
 		default:
 			if (request instanceof Object) {
@@ -164,15 +163,18 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
 					switch (way){
 						case "direct":
 							proxyhandler.changeProxyMode("direct");
+							global_config.proxy= "direct";
 							break;
 						case "system":
 							// add code here
+							global_config.proxy = "system";
 							break;
 						case "shadowsocks":
 							proxyhandler.changeProxyMode("shadowsocks");
+							global_config.proxy = "shadowsocks";
 							break;
 						case "auto":
-							//add code here							
+							global_config.proxy ="auto";						
 							break;
 						default:
 							console.log("unknown proxy type");
@@ -187,4 +189,9 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
 				break;
 			}
 	}
+});
+
+/**/
+chrome.bookmarks.onCreated.addListener(function(callback) {
+	console.log(callback);
 });

@@ -53,24 +53,29 @@ var pageBehavior = {
   }
 }
 
-pageBehavior.log("load ready");
-pageBehavior.log("load ready+1");
-pageBehavior.log("load ready addListener shadowsocs ss");
-
-for (var i = 0; i < 20; i++) {
-  pageBehavior.log("hello world"+i);
-}
   
-var page = {
+var pageController= {
+    init:function(){
+
+    },
     render:function(config){
 
+    },
+    start:function(){
+      pageBehavior.init();
+      background.init();
+      this.loadConfigFromBackground();
+    },
+    loadConfigFromBackground:function(){
+        background.getProxy(function(btn){
+          console.log(btn);
+        });
     }
 };
 
 
 function init() {
-  pageBehavior.init();
-  background.init();
+    pageController.start();
 }
 
 init();
