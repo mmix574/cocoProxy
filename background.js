@@ -79,9 +79,6 @@
 // 	}, ['requestHeaders']
 // );
 
-// setInterval(function(){
-// 	chrome.runtime,sendMessage();
-// },1000);
 
 
 //need to be sync
@@ -90,9 +87,9 @@ var global_config = {
 	proxy:"direct"
 };
 
-// neednot to be sync 
+// neednot to be sync
 var global_log ={
-	logs:[];
+	logs:[]
 };
 
 var configHandler = {
@@ -103,7 +100,7 @@ var configHandler = {
 
 	},
 	getConfig:function(){
-		
+
 	},
 	addlog:function(log){
 		var newlog = new Object();
@@ -195,7 +192,7 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
 							global_config.proxy = "shadowsocks";
 							break;
 						case "auto":
-							global_config.proxy ="auto";						
+							global_config.proxy ="auto";
 							break;
 						default:
 							console.log("unknown proxy type");
@@ -215,3 +212,9 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
 chrome.bookmarks.onCreated.addListener(function(callback) {
 	console.log(callback);
 });
+
+var i = 0;
+setInterval(function(){
+		chrome.runtime.sendMessage({"addlog":"this is the content of the log"+i});
+		i++;
+},1000);
