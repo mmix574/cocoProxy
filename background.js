@@ -83,17 +83,39 @@
 // 	chrome.runtime,sendMessage();
 // },1000);
 
+
+//need to be sync
 var global_config = {
 	// default settings
 	proxy:"direct"
 };
 
+// neednot to be sync 
+var global_log ={
+	logs:[];
+};
+
 var configHandler = {
+	modifyProxyMode:function(way){
+		global_config.proxy = way;
+	},
 	saveConfig:function(){
 
 	},
 	getConfig:function(){
 		
+	},
+	addlog:function(log){
+		var newlog = new Object();
+		newlog.time = new Date().toLocaleTimeString();
+		newlog.log = log;
+		global_log.push(newlog);
+	}
+};
+
+var popupFunction ={
+	log:function(message){
+		chrome.runtime.sendMessage("addlog",message);
 	}
 };
 
@@ -146,12 +168,11 @@ var proxyhandler = {
 
 /*response all the message*/
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
+	console.log("request from popup.js : " + request);
 	switch (request) {
 		case "config":
-			console.log("config");
 			break;
 		case "log":
-			console.log("log");
 			break;
 		case "proxy":
 			sendResponse(global_config.proxy);
@@ -181,11 +202,10 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
 							break;
 					}
 				}else {
-					console.log("unrecongnized message type object");
-					console.log(request);
+					console.log("popup.js send an unrecongnized object");
 				}
 			} else {
-				console.log("unknow message type" + request);
+				console.log("popup.js send an unrecongnized string");
 				break;
 			}
 	}

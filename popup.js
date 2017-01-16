@@ -2,15 +2,14 @@ var background = {
     init:function(){
       this.bindMessageAction();
     },
-    message:function(request,callback){
-        if(callback instanceof Function){
-          chrome.runtime.sendMessage(request,callback);
-        }else{
-          chrome.runtime.sendMessage(request);
-        }
-    },
     bindMessageAction:function(){
       chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
+        switch (request){
+          case "addlog":
+            break;
+          default:
+            break;
+        }
         console.log("get some message form background.js");
       });
     },
@@ -68,7 +67,7 @@ var pageController= {
     },
     loadConfigFromBackground:function(){
         background.getProxy(function(btn){
-          console.log(btn);
+          pageBehavior.setBtnActive(btn);
         });
     }
 };
