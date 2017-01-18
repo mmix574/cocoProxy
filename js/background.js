@@ -6,37 +6,41 @@ console.log = function(msg) {
 	old_console.log(msg);
 }
 
-//--------------start coding ---------------------//
 
 
 //share code area
 var share = this;
 share.storage = {};
-share.has = function(obj){
-	if(obj in share.storage){
+share.has = function(obj) {
+	if (obj in share.storage) {
 		return true;
-	}else{
+	} else {
 		return false;
 	}
 }
-share.put = function(key,value){
-	if(key in share.storage){return false;}
-	else{
+share.put = function(key, value) {
+	if (key in share.storage) {
+		return false;
+	} else {
 		share.storage.key = value;
 	}
 }
-share.get = function(key){
-	if(key in share.storage){
+share.get = function(key) {
+	if (key in share.storage) {
 		return share.storage.key;
-	}else{
+	} else {
 		return null;
 	}
 }
 
 
+
+//----------------start coding ---------------------//
 var background = {
 	proxy: "system", //default_value
-	log: [],
+	logs: [],
+	proxyController:{},
+	bookmarkController:{},
 	init: function() {
 		chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
 			if (request.fn in background) {
@@ -45,9 +49,24 @@ var background = {
 				console.log("popup request for a function name " + request.fn + "which is not defined in background.js");
 			}
 		});
+		if (background.fn.onload instanceof Function) {
+			// chrome.windows.onCreated.addListener(function(windowId) {
+			// 	console.log("onCreated");
+			// });
+			background.fn.onload();
+		}
+		if (background.fn.ondepart instanceof Function) {
+			chrome.windows.onRemoved.addListener(function(windowId) {
+				background.fn.ondepart();
+			});
+		}
+		this.loadOtherController();
 	},
 	setProxy: function(request, sender, sendResponse) {
 		this.proxy = request.proxy;
+		this.proxyController.changeProxyMode(request.proxy,function(){
+			console.log("Proxy Mode Change to "+request.proxy);
+		});
 	},
 	getProxy: function(request, sender, sendResponse) {
 		sendResponse({
@@ -57,12 +76,30 @@ var background = {
 	addLog: function(request, sender, sendResponse) {
 
 	},
-	test: function() {
-		setInterval(function(){
-			if(share.has("key")){
-				console.log(share.get("key"));
-			}
-		},1000);
+	getLogs: function(request, sender, sendResponse) {
+
+	},
+	fn: {
+		onload: {},
+		ondepart: {},
+		job:{}
+	},
+	start: function() {
+		this.init();
+	},
+	loadPerference: function() {
+		chrome.storage.local.get("proxy",function(items){
+			background.proxy = items.proxy;
+			console.log("proxy mode loaded: "+background.proxy);
+		});
+	},
+	savePerference: function(){
+		chrome.storage.local.set({proxy:background.proxy},function(){
+			console.log("proxy mode saved: "+background.proxy);
+		});
+	},
+	loadOtherController:function(){
+		this.proxyController = proxyFactory.getProxyController();
 	}
 };
 
@@ -72,15 +109,26 @@ var front = {
 		mssg.time = "20000";
 		mssg.content = "this is the content of msg.content";
 		chrome.runtime.sendMessage({
-			fn:"log",
-			mssg:mssg
+			fn: "log",
+			mssg: mssg
 		}, function(response) {
 			console.log(response);
 		});
 	}
 };
 
-background.init();
-background.test();
+background.fn.onload = function() {
+	background.loadPerference();
+}
+background.fn.ondepart = function(){
+	background.savePerference();
+}
 
-console.log();
+
+
+// chrome.storage.local.set({proxy:background.proxy},function(){
+// 	console.log("save!");
+// });
+
+//last after all jobs finished
+background.start();

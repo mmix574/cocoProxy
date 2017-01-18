@@ -1,16 +1,9 @@
-var storage = {
-	set: function(key, value) {
-		var data = {
-			[key]: value
-		};
-		return chrome.storage.sync.set(data);
-	},
-	get: function(key,callback) {
-		chrome.storage.sync.get(key,callback);
+// [] or {} return true
+var empty = function (obj){
+	if(Object.keys(obj).length==0){
+		return false;
+	}else{
+		return true;
 	}
-};
+}
 
-// storage.set("say","what does the fox said");
-// storage.get("say",function(items){
-// 	console.log(items);
-// });
