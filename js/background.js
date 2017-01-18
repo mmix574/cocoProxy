@@ -41,6 +41,7 @@ var background = {
 	logs: [],
 	proxyController:{},
 	bookmarkController:{},
+	networkController:{},
 	init: function() {
 		chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
 			if (request.fn in background) {

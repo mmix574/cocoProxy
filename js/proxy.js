@@ -34,7 +34,7 @@ var proxyFactory = {
                 host: "127.0.0.1",
                 port: 1080
               },
-              bypassList: ["foobar.com"]
+              bypassList: ["ip.cn"]
             }
           };
           chrome.proxy.settings.set({
