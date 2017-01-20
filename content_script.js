@@ -50,11 +50,17 @@ var divId = "coco_div";
 if (!document.getElementById(divId)) {
 	var html = document.getElementsByTagName('html')[0];
 	var div = document.createElement('div');
-	div.id = divId;
+	div.id = "coco_div"
 	html.appendChild(div);
-	divId = div;
 }
 
-var round = document.createElement('div');
-round.id = "coco_round";
-divId.appendChild("round");
+
+
+var roundId = "coco_round";
+if (!document.getElementById(roundId)) {
+	var parent_div = document.getElementById("coco_div");
+	var child_div = document.createElement('div');
+	child_div.id="coco_round";
+	parent_div.appendChild(child_div);
+}
+
