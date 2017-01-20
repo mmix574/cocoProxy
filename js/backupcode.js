@@ -91,3 +91,14 @@
 // 		urls: ['<all_urls>']
 // 	}, ['requestHeaders']
 // );
+
+// chrome.webRequest.onBeforeSendHeaders.addListener(
+// 	function(details) {
+// 		console.log(details);
+// 	}, {
+// 		urls: ["<all_urls>"]
+// 	}, ["requestHeaders"]);
+
+// chrome.tabs.onCreated.addListener(function(callback) {
+// 	console.log(callback);
+// });

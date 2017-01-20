@@ -39,67 +39,76 @@ share.get = function(key) {
 var background = {
 	proxy: "system", //default_value
 	logs: [],
-	proxyController:{},
-	bookmarkController:{},
-	networkController:{},
+	proxyController: {},
+	bookmarkController: {},
+	networkController: {},
 	init: function() {
 		chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
-			if (request.fn in background) {
-				background[request.fn](request, sender, sendResponse);
+			if (request.fn in background.fn) {
+				background.fn[request.fn](request, sender, sendResponse);
 			} else {
 				console.log("popup request for a function name " + request.fn + "which is not defined in background.js");
 			}
 		});
-		if (background.fn.onload instanceof Function) {
+		if (background.interface.onload instanceof Function) {
 			// chrome.windows.onCreated.addListener(function(windowId) {
 			// 	console.log("onCreated");
 			// });
-			background.fn.onload();
+			background.interface.onload();
 		}
-		if (background.fn.ondepart instanceof Function) {
+		if (background.interface.ondepart instanceof Function) {
 			chrome.windows.onRemoved.addListener(function(windowId) {
-				background.fn.ondepart();
+				background.interface.ondepart();
 			});
 		}
 		this.loadOtherController();
 	},
-	setProxy: function(request, sender, sendResponse) {
-		this.proxy = request.proxy;
-		this.proxyController.changeProxyMode(request.proxy,function(){
-			console.log("Proxy Mode Change to "+request.proxy);
-		});
-	},
-	getProxy: function(request, sender, sendResponse) {
-		sendResponse({
-			proxy: this.proxy
-		});
-	},
-	addLog: function(request, sender, sendResponse) {
-
-	},
-	getLogs: function(request, sender, sendResponse) {
-
-	},
-	fn: {
+	interface: {
 		onload: {},
 		ondepart: {},
-		job:{}
+		job: {}
+	},
+	fn:{
+		//Message Calling
+		setProxy: function(request, sender, sendResponse) {
+			background.proxy = request.proxy;
+			background.proxyController.changeProxyMode(request.proxy, function() {
+				console.log("Proxy Mode Change to " + request.proxy);
+			});
+		},
+		getProxy: function(request, sender, sendResponse) {
+			sendResponse({
+				proxy: background.proxy
+			});
+		},
+		addLog: function(request, sender, sendResponse) {
+
+		},
+		getLogs: function(request, sender, sendResponse) {
+
+		},
+		stopTab: function(request, sender, sendResponse) {
+			console.log(sender.tab.id);
+		}
 	},
 	start: function() {
 		this.init();
 	},
 	loadPerference: function() {
-		chrome.storage.local.get("proxy",function(items){
+		chrome.storage.local.get("proxy", function(items) {
 			background.proxy = items.proxy;
-			console.log("proxy mode loaded: "+background.proxy);
+			background.proxyController.changeProxyMode(background.proxy);
+			console.log("proxy mode loaded: " + background.proxy);
 		});
 	},
-	savePerference: function(){
-		chrome.storage.local.set({proxy:background.proxy},function(){
-			console.log("proxy mode saved: "+background.proxy);
+	savePerference: function() {
+		chrome.storage.local.set({
+			proxy: background.proxy
+		}, function() {
+			console.log("proxy mode saved: " + background.proxy);
 		});
 	},
-	loadOtherController:function(){
+	loadOtherController: function() {
 		this.proxyController = proxyFactory.getProxyController();
 	}
 };
@@ -118,18 +127,35 @@ var front = {
 	}
 };
 
-background.fn.onload = function() {
+background.interface.onload = function() {
 	background.loadPerference();
 }
-background.fn.ondepart = function(){
+background.interface.ondepart = function() {
 	background.savePerference();
 }
 
 
-
-// chrome.storage.local.set({proxy:background.proxy},function(){
-// 	console.log("save!");
-// });
-
-//last after all jobs finished
+//call after all jobs finished
 background.start();
+
+
+
+// chrome.webRequest.onBeforeSendHeaders.addListener(
+// 	function(details) {
+// 		console.log("onBeforeSendHeaders");
+// 		console.log(details);
+// 	}, {
+// 		urls: ["*://memect.com/*"]
+// 	}, ["requestHeaders"]);
+
+
+// chrome.webRequest.onCompleted.addListener(
+// 	function(details) {
+// 		console.log("onCompleted...");
+// 		console.log(details);
+// 	}, {
+// 		urls: ["*://www.evil.com/*"]
+// 		// urls: ["<all_urls>"]
+// 	});
+
+// console.log(indexedDB);

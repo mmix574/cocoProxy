@@ -39,6 +39,7 @@ var app = {
                     if(app.view.fn.btndown instanceof Function){
                         app.view.fn.btndown(this.id);
                     }
+                    console.log("clicked "+this.id);
                 });
 
             }
