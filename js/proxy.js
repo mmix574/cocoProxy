@@ -73,7 +73,7 @@ var proxyFactory = {
                                 host: "127.0.0.1",
                                 port: 1080
                             },
-                            bypassList: ["127.0.0.1","192.168.1.1/24"]
+                            bypassList: ["127.0.0.1","192.168.1.1/24","<local>"]
                         }
                     };
                     chrome.proxy.settings.set({
