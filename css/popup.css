@@ -1,22 +1,26 @@
-<style type="text/css">
-	*{
-		font-family: "Microsoft YaHei",Arial,Helvetica,sans-serif;
-	}
-	body{
-		height: 300px;
-		width: 230px;
-		padding: 0;
-		margin: 0;
-		background-color: #E1E1E1;
-	}
-	.button_warper{
-		text-align: center;
-		padding: 5px;
-	}
-	button:focus{
-		outline: none;
-	}
-	.btn_selected{
-		background-color: #5cb85c;
-	}	
-</style>
+*{
+	font-family: "Microsoft YaHei",Arial,Helvetica,sans-serif;
+}
+body{
+
+}
+#body-fix{
+	background-color: #38bfb7;
+	padding: 0;
+	margin: 0;
+	height: 312px;
+	width: 230px;
+}
+.button-warrper{
+	text-align: center;
+	padding: 5px;
+}
+button:focus{
+	outline: none;
+}
+.btn_selected{
+	background-color: #5cb85c;
+}
+.l-spacing{
+	height: 45px;
+}

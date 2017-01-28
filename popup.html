@@ -7,42 +7,59 @@
 	<link rel="stylesheet" href="css/bootstrap.min.css">
 </head>
 
-
 <body>
-	<div style="height: 10px;"></div>
-	<div >
-		<div class ="button_warper" >
-			<button class="btn proxyBtn" id="direct">Direct</button>
-		</div>
+    <div id="body-fix">
+        <div id = "div-spacing-maker" style="padding-top: 8px;">
+            <div class = "l-spacing">
+                <div class ="button-warrper" >
+                    <button class="btn proxyBtn" id="direct">Direct</button>
+                </div>
+            </div>
+            <div class = "l-spacing">
+                <div class ="button-warrper">
+                    <button class="btn proxyBtn" id="shadowsocks">Proxy</button>
+                </div>
+            </div>
+            <div class = "l-spacing">
+                <div><font>Auto:</font></div>
+                <div>
+                    <label class="switch">
+                      <input type="checkbox">
+                      <div class="slider round"></div>
+                    </label>
+                </div>
 
-		<div class ="button_warper">
-			<button class="btn proxyBtn" id="shadowsocks">Proxy</button>
-		</div>
-		Auto Switch
-			<!-- Rounded switch -->
-		<label class="switch">
-		  <input type="checkbox">
-		  <div class="slider round"></div>
-		</label>
+            </div>
 
+        </div>
 
-	</div>
-
-	<div class="console" style="border-radius: 2px;height: 160px;border-radius: 10px;text-align:center;">
-		<div id="console" style="background-color: #ffffff;width: 96%;height: 100%;margin:auto;border-radius: 4px;opacity: 0.8;text-align: left;padding-left: 2px;overflow-y: scroll;">
-			
-			<div>time:</div>
-			<div>content...
-				backEnd:JAVA JSP Servlet JUnit
-				Maven Spring Spring MVC Mybatis Thymeleaf
-				MariaDB
-				</div>
-		</div>
-	</div>
+        <div class="console" style="border-radius: 2px;height: 160px;border-radius: 10px;text-align:center;">
+            <div id="console" style="background-color: #ffffff;width: 96%;height: 100%;margin:auto;border-radius: 4px;opacity: 0.8;text-align: left;padding-left: 2px;overflow-y: scroll;">
+                <div class="message">
+                        <div class="time">
+                            <font style="font-size: 12px;color: black">
+                            [下午10:20:34]:
+                            </font>
+                        </div>
+                        <div>
+                        <font style="font-size: 10px">content...
+                            backEnd:JAVA JSP Servlet JUnit
+                            Maven Spring Spring MVC Mybatis Thymeleaf
+                            MariaDB</font>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
 
-<script type="text/javascript" src="js/common.js"></script>
-<script type="text/javascript" src="js/popup-fix.js"></script>
-<script type="text/javascript" src="js/popup.js"></script>
 
+
+<!--<script type="text/javascript" src="js/common.js"></script>-->
+<!--<script type="text/javascript" src="js/popup-fix.js"></script>-->
+<!--<script type="text/javascript" src="js/popup.js"></script>-->
+
+<script type="application/javascript">
+    console.log(new Date().toLocaleString());
+</script>

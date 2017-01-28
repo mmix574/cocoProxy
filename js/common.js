@@ -18,6 +18,7 @@ var common = {
 			chrome.browserAction.setBadgeText({
 				text: "D"
 			});
+			chrome.browserAction.setBadgeBackgroundColor({color: [74,202,187, 255]});
 		} else { //Proxy Mode
 			chrome.browserAction.setIcon({
 				path: "/image/mushroom_green.png"
@@ -26,6 +27,7 @@ var common = {
 			chrome.browserAction.setBadgeText({
 				text: "P"
 			});
+			chrome.browserAction.setBadgeBackgroundColor({color: [74,202,187, 255]});
 		}
 	}
 };
