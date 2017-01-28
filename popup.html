@@ -3,6 +3,7 @@
 <head>
 	<title>cocoProxy</title>
 	<link rel="stylesheet" href="css/popup.css">
+	<link rel="stylesheet" href="css/toggle-switch.css">
 	<link rel="stylesheet" href="css/bootstrap.min.css">
 </head>
 
@@ -12,29 +13,36 @@
 		<div class ="button_warper" >
 			<button class="btn proxyBtn" id="direct">Direct</button>
 		</div>
-		<div class ="button_warper">
+<!-- 		<div class ="button_warper">
 			<button class="btn proxyBtn" id="pac_script">Pac_script</button>
-		</div>
-		<div class ="button_warper">
+		</div> -->
+<!-- 		<div class ="button_warper">
 		<div class ="button_warper">
 			<button class="btn proxyBtn" id="fixed_servers">Fixed_servers</button>
-		</div>
-		<div class ="button_warper">
+		</div> -->
+<!-- 		<div class ="button_warper">
 			<button class="btn proxyBtn" id="system">System</button>
-		</div>
+		</div> -->
 		<div class ="button_warper">
-			<button class="btn proxyBtn" id="shadowsocks">Shadowsocks</button>
+			<button class="btn proxyBtn" id="shadowsocks">Proxy</button>
 		</div>
-		<div class ="button_warper">
+<!-- 		<div class ="button_warper">
 			<button class="btn proxyBtn" id="auto">Auto</button>
-		</div>
-		<div style="height: 1px;border-bottom: 1px solid black"></div>
+		</div> -->
+<!-- 		<div style="height: 1px;border-bottom: 1px solid black"></div>
 		<div class ="button_warper">
-			<button class="btn opbtn" id="Option">Option Pannel</button>
-		</div>
-	
-	</div>
+			<button class="btn opbtn" id="Option">Learning</button>
+		</div> -->
 
+		Auto Switch
+			<!-- Rounded switch -->
+		<label class="switch">
+		  <input type="checkbox">
+		  <div class="slider round"></div>
+		</label>
+
+
+	</div>
 
 	<div class="console" style="border-radius: 2px;height: 160px;border-radius: 10px;text-align:center;">
 		<div id="console" style="background-color: #ffffff;width: 96%;height: 100%;margin:auto;border-radius: 4px;opacity: 0.8;text-align: left;padding-left: 2px;overflow-y: scroll;"></div>
@@ -44,5 +52,6 @@
 </html>
 
 <script type="text/javascript" src="js/common.js"></script>
-<script type="text/javascript" src="popup.js"></script>
+<script type="text/javascript" src="js/popup-fix.js"></script>
+<script type="text/javascript" src="js/popup.js"></script>
 

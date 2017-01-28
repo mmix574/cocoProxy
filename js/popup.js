@@ -1,17 +1,3 @@
-//make it easy to debug
-var old_console = chrome.extension.getBackgroundPage().old_console;
-console.log = function(msg) {
-    old_console.log("[" + new Date().toLocaleTimeString() + "  popup.js] ");
-    old_console.log(msg);
-}
-
-// share code area
-var share = chrome.extension.getBackgroundPage();
-
-
-
-//--------------start coding ---------------------//
-
 var app = {
     view: {
         init: function() {
@@ -36,17 +22,19 @@ var app = {
             for (var i = 0; i < btns.length; i++) {
                 btns[i].addEventListener("click", function() {
                     app.view.setBtnActive(this.id);
-                    if(app.view.fn.btndown instanceof Function){
+                    common.changePopupIcon(this.id);
+
+                    if (app.view.fn.btndown instanceof Function) {
                         app.view.fn.btndown(this.id);
                     }
-                    console.log("clicked "+this.id);
+                    console.log("clicked " + this.id);
                 });
 
             }
         },
         //call when button is push down
-        fn:{
-            btndown:{}
+        fn: {
+            btndown: {}
         },
     },
     // All action in controller
@@ -71,8 +59,11 @@ var app = {
             });
 
             //
-            app.view.fn.btndown = function(id){
-                chrome.runtime.sendMessage({fn:"setProxy",proxy:id});
+            app.view.fn.btndown = function(id) {
+                chrome.runtime.sendMessage({
+                    fn: "setProxy",
+                    proxy: id
+                });
             }
 
         },
@@ -96,8 +87,6 @@ var app = {
         });
     }
 };
-
-
 
 
 app.start();

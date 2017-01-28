@@ -1,43 +1,5 @@
-// make it easy to debug
-var old_console = {};
-old_console.log = console.log;
-console.log = function(msg) {
-	old_console.log("[" + new Date().toLocaleTimeString() + "  background.js] ");
-	old_console.log(msg);
-}
-
-
-
-//share code area
-var share = this;
-share.storage = {};
-share.has = function(obj) {
-	if (obj in share.storage) {
-		return true;
-	} else {
-		return false;
-	}
-}
-share.put = function(key, value) {
-	if (key in share.storage) {
-		return false;
-	} else {
-		share.storage.key = value;
-	}
-}
-share.get = function(key) {
-	if (key in share.storage) {
-		return share.storage.key;
-	} else {
-		return null;
-	}
-}
-
-
-
-//----------------start coding ---------------------//
 var background = {
-	proxy: "system", //default_value
+	proxy: "direct", //default_value
 	logs: [],
 	proxyController: {},
 	bookmarkController: {},
@@ -98,6 +60,7 @@ var background = {
 		chrome.storage.local.get("proxy", function(items) {
 			background.proxy = items.proxy;
 			background.proxyController.changeProxyMode(background.proxy);
+			common.changePopupIcon(background.proxy);//耦合，这里要重写
 			console.log("proxy mode loaded: " + background.proxy);
 		});
 	},
@@ -113,19 +76,19 @@ var background = {
 	}
 };
 
-var front = {
-	log: function(msg) {
-		var mssg = {};
-		mssg.time = "20000";
-		mssg.content = "this is the content of msg.content";
-		chrome.runtime.sendMessage({
-			fn: "log",
-			mssg: mssg
-		}, function(response) {
-			console.log(response);
-		});
-	}
-};
+// var front = {
+// 	log: function(msg) {
+// 		var mssg = {};
+// 		mssg.time = "20000";
+// 		mssg.content = "this is the content of msg.content";
+// 		chrome.runtime.sendMessage({
+// 			fn: "log",
+// 			mssg: mssg
+// 		}, function(response) {
+// 			console.log(response);
+// 		});
+// 	}
+// };
 
 background.interface.onload = function() {
 	background.loadPerference();
