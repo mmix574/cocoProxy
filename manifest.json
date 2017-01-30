@@ -16,7 +16,8 @@
     "webRequest",
     "storage",
     "debugger" ,
-    "http://*/*", "https://*/*", "ftp://*/*"
+    "http://*/*", "https://*/*", "ftp://*/*",
+    "tabs"
   ],
 
   "content_scripts": [ {

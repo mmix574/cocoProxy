@@ -1,6 +1,7 @@
 var background = {
 	proxy: "direct", //default_value
 	logs: [],
+    tabs:[],
 	proxyController: {},
 	bookmarkController: {},
 	networkController: {},
@@ -58,9 +59,11 @@ var background = {
 	},
 	loadPerference: function() {
 		chrome.storage.local.get("proxy", function(items) {
-			background.proxy = items.proxy;
+		    if(items.proxy){
+                background.proxy = items.proxy;
+            }
 			background.proxyController.changeProxyMode(background.proxy);
-			common.changePopupIcon(background.proxy);//耦合，这里要重写
+			common.changePopupIcon(background.proxy);
 			console.log("proxy mode loaded: " + background.proxy);
 		});
 	},
@@ -121,4 +124,34 @@ background.start();
 // 		// urls: ["<all_urls>"]
 // 	});
 
-// console.log(indexedDB);
+//后台页面打开
+chrome.tabs.onCreated.addListener(function(id){
+
+});
+
+//tab点击切换
+chrome.tabs.onActiveChanged.addListener(function(id){
+    chrome.tabs.query({active:true},function(tabs){
+		console.log(tabs);
+	});
+});
+
+//分离窗口
+chrome.tabs.onAttached.addListener(function(){
+
+});
+
+
+chrome.windows.getCurrent(function(callback){
+    console.log(callback);
+});
+
+// Chrome inspect functions
+function tab_status(){
+    chrome.tabs.query({active:true,currentWindow:true,lastFocusedWindow:true},function(tabs){
+        console.log(tabs);
+    });
+}
+function proxy_status(){
+	console.log(background.proxy);
+}
