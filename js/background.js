@@ -124,27 +124,40 @@ background.start();
 // 		// urls: ["<all_urls>"]
 // 	});
 
-//后台页面打开
-chrome.tabs.onCreated.addListener(function(id){
+// //后台页面打开
+// chrome.tabs.onCreated.addListener(function(id){
+//
+// });
+//
+// //tab点击切换
+// chrome.tabs.onActiveChanged.addListener(function(id){
+//     chrome.tabs.query({active:true},function(tabs){
+// 		console.log(tabs);
+// 	});
+// });
+//
+// //分离窗口
+// chrome.tabs.onAttached.addListener(function(){
+//
+// });
 
+
+chrome.tabs.onUpdated.addListener(function(id){
+    chrome.tabs.get(id,function(tabDetail){
+        console.log(tabDetail);
+    })
 });
 
-//tab点击切换
-chrome.tabs.onActiveChanged.addListener(function(id){
-    chrome.tabs.query({active:true},function(tabs){
-		console.log(tabs);
-	});
+chrome.tabs.onCreated.addListener(function(tabStatus){
+    // console.log(tabStatus);
+    // chrome.tabs.get(id,function(tabDetail){
+    //     console.log(tabDetail);
+    // })
 });
 
-//分离窗口
-chrome.tabs.onAttached.addListener(function(){
-
-});
-
-
-chrome.windows.getCurrent(function(callback){
-    console.log(callback);
-});
+// chrome.windows.getCurrent(function(callback){
+//     console.log(callback);
+// });
 
 // Chrome inspect functions
 function tab_status(){
@@ -152,6 +165,7 @@ function tab_status(){
         console.log(tabs);
     });
 }
+
 function proxy_status(){
 	console.log(background.proxy);
 }
