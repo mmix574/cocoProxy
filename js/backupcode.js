@@ -102,3 +102,26 @@
 // chrome.tabs.onCreated.addListener(function(callback) {
 // 	console.log(callback);
 // });
+
+
+// chrome.windows.getCurrent(function(callback){
+//     console.log(callback);
+// });
+
+
+// //后台页面打开
+// chrome.tabs.onCreated.addListener(function(id){
+//
+// });
+//
+// //tab点击切换
+// chrome.tabs.onActiveChanged.addListener(function(id){
+//     chrome.tabs.query({active:true},function(tabs){
+// 		console.log(tabs);
+// 	});
+// });
+//
+// //分离窗口
+// chrome.tabs.onAttached.addListener(function(){
+//
+// });

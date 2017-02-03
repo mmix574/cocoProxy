@@ -19,7 +19,9 @@
     "http://*/*", "https://*/*", "ftp://*/*",
     "tabs"
   ],
-
+  "icons":{
+      "96":"image/icon.png"
+  },
   "content_scripts": [ {
           "exclude_globs": [  ],
           "include_globs": [ "*" ],

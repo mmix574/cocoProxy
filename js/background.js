@@ -1,5 +1,6 @@
 var background = {
 	proxy: "direct", //default_value
+	is_auto:false,
 	logs: [],
     tabs:[],
 	proxyController: {},
@@ -79,19 +80,19 @@ var background = {
 	}
 };
 
-// var front = {
-// 	log: function(msg) {
-// 		var mssg = {};
-// 		mssg.time = "20000";
-// 		mssg.content = "this is the content of msg.content";
-// 		chrome.runtime.sendMessage({
-// 			fn: "log",
-// 			mssg: mssg
-// 		}, function(response) {
-// 			console.log(response);
-// 		});
-// 	}
-// };
+var front = {
+	log: function(msg) {
+		var mssg = {};
+		mssg.time = "20000";
+		mssg.content = "this is the content of msg.content";
+		chrome.runtime.sendMessage({
+			fn: "log",
+			mssg: mssg
+		}, function(response) {
+			console.log(response);
+		});
+	}
+};
 
 background.interface.onload = function() {
 	background.loadPerference();
@@ -106,13 +107,16 @@ background.start();
 
 
 
-// chrome.webRequest.onBeforeSendHeaders.addListener(
-// 	function(details) {
-// 		console.log("onBeforeSendHeaders");
-// 		console.log(details);
-// 	}, {
-// 		urls: ["*://memect.com/*"]
-// 	}, ["requestHeaders"]);
+chrome.webRequest.onBeforeSendHeaders.addListener(
+	function(details) {
+
+	    chrome.tabs.get(details.tabId,function(callback){
+            console.log(callback);
+        });
+		console.log(details.url);
+	}, {
+		urls: ["<all_urls>"]
+	});
 
 
 // chrome.webRequest.onCompleted.addListener(
@@ -124,39 +128,17 @@ background.start();
 // 		// urls: ["<all_urls>"]
 // 	});
 
-// //后台页面打开
-// chrome.tabs.onCreated.addListener(function(id){
-//
-// });
-//
-// //tab点击切换
-// chrome.tabs.onActiveChanged.addListener(function(id){
-//     chrome.tabs.query({active:true},function(tabs){
-// 		console.log(tabs);
-// 	});
-// });
-//
-// //分离窗口
-// chrome.tabs.onAttached.addListener(function(){
-//
+// chrome.tabs.onUpdated.addListener(function(id){
+//     chrome.tabs.get(id,function(tabDetail){
+//         console.log(tabDetail.url);
+//     })
 // });
 
-
-chrome.tabs.onUpdated.addListener(function(id){
-    chrome.tabs.get(id,function(tabDetail){
-        console.log(tabDetail);
-    })
-});
-
-chrome.tabs.onCreated.addListener(function(tabStatus){
-    // console.log(tabStatus);
-    // chrome.tabs.get(id,function(tabDetail){
-    //     console.log(tabDetail);
-    // })
-});
-
-// chrome.windows.getCurrent(function(callback){
-//     console.log(callback);
+// chrome.tabs.onCreated.addListener(function(tabStatus){
+//     // console.log(tabStatus);
+//     // chrome.tabs.get(id,function(tabDetail){
+//     //     console.log(tabDetail);
+//     // })
 // });
 
 // Chrome inspect functions

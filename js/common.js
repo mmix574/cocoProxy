@@ -31,3 +31,9 @@ var common = {
 		}
 	}
 };
+
+var config = {
+	proxyList:["*.baidu.com"],
+	directList:["*.google.com.hk"],
+	default:"direct"
+};
