@@ -157,3 +157,23 @@
 //         console.log(tabDetail);
 //     })
 // });
+
+
+
+// chrome.tabs.onUpdated.addListener(function(tabId,changeInfo,tab){
+//     // if(tab.url.indexOf("taobao")!=-1){
+//     //     background.service.proxyModeChange("direct");
+//     // }else{
+//     //     console.log("not a taobao website",tab.url);
+//     // }
+//     console.log("onUpdated:"+tab.url);
+// });
+//
+// chrome.tabs.onCreated.addListener(function(tab){
+//     // if(tab.url.indexOf("taobao")!=-1){
+//     //     background.service.proxyModeChange("direct");
+//     // }else{
+//     //     console.log("not a taobao website",tab.url);
+//     // }
+//     console.log("onCreated:"+tab.url);
+// });

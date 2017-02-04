@@ -130,7 +130,16 @@ chrome.webRequest.onBeforeSendHeaders.addListener(
         // }else{
         //     console.log("not a taobao website ",details.url);
         // }
-        console.log(details);
+
+        if(details.type=="main_frame"){
+            if(details.url.indexOf("baidu")){
+                background.service.proxyModeChange("direct");
+            }else if(details.index("ip.cn")){
+                background.service.proxyModeChange("direct");
+            }else{
+                background.service.proxyModeChange("proxy");
+            }
+        }
 
 	}, {
 		urls: ["<all_urls>"]
@@ -147,13 +156,6 @@ chrome.webRequest.onBeforeSendHeaders.addListener(
 // 	});
 
 
-// chrome.tabs.onUpdated.addListener(function(tabId,changeInfo,tab){
-//     if(tab.url.indexOf("taobao")!=-1){
-//         background.service.proxyModeChange("direct");
-//     }else{
-//         console.log("not a taobao website",tab.url);
-//     }
-// });
 
 
 
