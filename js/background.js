@@ -122,25 +122,18 @@ background.start();
 
 chrome.webRequest.onBeforeSendHeaders.addListener(
 	function(details) {
-
-        // if(details.url.indexOf("www.taobao.com")!=-1){
-        //
-        //     background.service.proxyModeChange("direct");
-        //
-        // }else{
-        //     console.log("not a taobao website ",details.url);
-        // }
-
         if(details.type=="main_frame"){
-            if(details.url.indexOf("baidu")){
-                background.service.proxyModeChange("direct");
-            }else if(details.index("ip.cn")){
-                background.service.proxyModeChange("direct");
+           var way = rule.getProxyMethod(details.url);
+               console.log("url:"+details.url+"methods"+way);
+
+            if(way=="direct"){
+                background.service.proxyModeChange(way);
+            }else if(way=="proxy"){
+                background.service.proxyModeChange(way);
             }else{
-                background.service.proxyModeChange("proxy");
+                //default calling here
             }
         }
-
 	}, {
 		urls: ["<all_urls>"]
 	});
