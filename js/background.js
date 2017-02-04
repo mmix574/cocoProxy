@@ -27,6 +27,17 @@ var background = {
 		}
 		this.loadOtherController();
 	},
+    service:{
+        proxyModeChange:function(way){
+            if(way=="direct"||way=="proxy"){
+                background.proxy = way;
+                common.changePopupIcon(background.proxy);
+                background.proxyController.changeProxyMode(background.proxy, function() {
+                    console.log("Proxy Mode Change to " +  background.proxy);
+                });
+            }
+        }
+    },
 	interface: {
 		onload: {},
 		ondepart: {},
@@ -102,6 +113,8 @@ background.interface.ondepart = function() {
 }
 
 
+
+
 //call after all jobs finished
 background.start();
 
@@ -110,10 +123,15 @@ background.start();
 chrome.webRequest.onBeforeSendHeaders.addListener(
 	function(details) {
 
-	    chrome.tabs.get(details.tabId,function(callback){
-            console.log(callback);
-        });
-		console.log(details.url);
+        // if(details.url.indexOf("www.taobao.com")!=-1){
+        //
+        //     background.service.proxyModeChange("direct");
+        //
+        // }else{
+        //     console.log("not a taobao website ",details.url);
+        // }
+        console.log(details);
+
 	}, {
 		urls: ["<all_urls>"]
 	});
@@ -128,18 +146,16 @@ chrome.webRequest.onBeforeSendHeaders.addListener(
 // 		// urls: ["<all_urls>"]
 // 	});
 
-// chrome.tabs.onUpdated.addListener(function(id){
-//     chrome.tabs.get(id,function(tabDetail){
-//         console.log(tabDetail.url);
-//     })
+
+// chrome.tabs.onUpdated.addListener(function(tabId,changeInfo,tab){
+//     if(tab.url.indexOf("taobao")!=-1){
+//         background.service.proxyModeChange("direct");
+//     }else{
+//         console.log("not a taobao website",tab.url);
+//     }
 // });
 
-// chrome.tabs.onCreated.addListener(function(tabStatus){
-//     // console.log(tabStatus);
-//     // chrome.tabs.get(id,function(tabDetail){
-//     //     console.log(tabDetail);
-//     // })
-// });
+
 
 // Chrome inspect functions
 function tab_status(){
@@ -148,6 +164,6 @@ function tab_status(){
     });
 }
 
-function proxy_status(){
-	console.log(background.proxy);
+function test(){
+
 }

@@ -5,7 +5,6 @@ var proxyFactory = {
         if(app){
             this.app = app;
         }
-        
         var pm = {};
         pm.changeProxyMode = function(way, fn) {
             switch (way) {
@@ -60,6 +59,33 @@ var proxyFactory = {
                     break;
                     break;
                 case "shadowsocks":
+                    var config = {
+                        mode: "fixed_servers",
+                        rules: {
+                            proxyForHttp: {
+                                scheme: "socks5",
+                                host: "127.0.0.1",
+                                port: 1080
+                            },
+                            proxyForHttps: {
+                                scheme: "socks5",
+                                host: "127.0.0.1",
+                                port: 1080
+                            },
+                            bypassList: ["127.0.0.1","192.168.1.1/24","<local>"]
+                        }
+                    };
+                    chrome.proxy.settings.set({
+                            value: config,
+                            scope: 'regular'
+                        },
+                        function() {
+                            if (fn instanceof Function) {
+                                fn();
+                            }
+                        });
+                    break;
+                case "proxy":
                     var config = {
                         mode: "fixed_servers",
                         rules: {

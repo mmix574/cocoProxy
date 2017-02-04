@@ -125,3 +125,35 @@
 // chrome.tabs.onAttached.addListener(function(){
 //
 // });
+
+
+
+
+// chrome.tabs.onUpdated.addListener(function(id){
+//     chrome.tabs.get(id,function(tabDetail){
+//         // if(tabDetail.url.indexOf("www.taobao.com")!=-1){
+//         //
+//         //     background.proxy = "direct";
+//         //     common.changePopupIcon(background.proxy);
+//         //     background.proxyController.changeProxyMode(background.proxy, function() {
+//         //         console.log("Proxy Mode Change to " +  background.proxy);
+//         //     });
+//         //
+//         // }else{
+//         //     console.log("taobaoerror");
+//         // }
+//         if(tabDetail.url.indexOf("www.taobao.com")!=-1){
+//
+//
+//
+//         }
+//     })
+// });
+
+
+// chrome.tabs.onCreated.addListener(function(tabStatus){
+//     console.log(tabStatus);
+//     chrome.tabs.get(id,function(tabDetail){
+//         console.log(tabDetail);
+//     })
+// });
