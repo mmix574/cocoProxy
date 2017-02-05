@@ -3,8 +3,20 @@
  */
 
 var rule = {
-    direct_url:["www.baidu.com","bilibili.com","www.taobao.com","zhihu.com","jd.com"],
-    proxy_url:["google","ip.cn","youtube.com"],
+    direct_url:[
+        "www.baidu.com",
+        "bilibili.com",
+        "www.taobao.com",
+        "zhihu.com",
+        "jd.com",
+        "dangdang.com",
+        "www.tuicool.com",
+    ],
+    proxy_url:["google",
+        "ip.cn",
+        "youtube.com",
+        "chrome.com"
+    ],
 
     /*return "proxy","direct" or "default"*/
     getProxyMethod:function(url){
@@ -22,3 +34,6 @@ var rule = {
         return "default";
     }
 };
+var urltest = function(url){
+    console.log(rule.getProxyMethod(url));
+}

@@ -177,3 +177,14 @@
 //     // }
 //     console.log("onCreated:"+tab.url);
 // });
+
+
+
+// chrome.webRequest.onCompleted.addListener(
+// 	function(details) {
+// 		console.log("onCompleted...");
+// 		console.log(details);
+// 	}, {
+// 		urls: ["*://www.evil.com/*"]
+// 		// urls: ["<all_urls>"]
+// 	});

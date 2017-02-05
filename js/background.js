@@ -28,7 +28,7 @@ var background = {
 		this.loadOtherController();
 	},
     service:{
-        proxyModeChange:function(way){
+        proxyModeChangeService:function(way){
             if(way=="direct"||way=="proxy"){
                 background.proxy = way;
                 common.changePopupIcon(background.proxy);
@@ -36,7 +36,16 @@ var background = {
                     console.log("Proxy Mode Change to " +  background.proxy);
                 });
             }
-        }
+        },
+		takeThisUrlIntoConsider:function(url){
+            var way = rule.getProxyMethod(url);
+            if(way=="direct"||way=="proxy"){
+                background.service.proxyModeChangeService(way);
+			}else{
+            	console.log("default proxy mode calling .."+url);
+			}
+		}
+
     },
 	interface: {
 		onload: {},
@@ -120,35 +129,23 @@ background.start();
 
 
 
-chrome.webRequest.onBeforeSendHeaders.addListener(
+chrome.webRequest.onBeforeRequest.addListener(
 	function(details) {
         if(details.type=="main_frame"){
-           var way = rule.getProxyMethod(details.url);
-               console.log("url:"+details.url+"methods"+way);
-
-            if(way=="direct"){
-                background.service.proxyModeChange(way);
-            }else if(way=="proxy"){
-                background.service.proxyModeChange(way);
-            }else{
-                //default calling here
-            }
+			background.service.takeThisUrlIntoConsider(details.url);
         }
 	}, {
 		urls: ["<all_urls>"]
-	});
+
+	},["blocking"]);
 
 
-// chrome.webRequest.onCompleted.addListener(
-// 	function(details) {
-// 		console.log("onCompleted...");
-// 		console.log(details);
-// 	}, {
-// 		urls: ["*://www.evil.com/*"]
-// 		// urls: ["<all_urls>"]
-// 	});
-
-
+//tab点击切换
+chrome.tabs.onActiveChanged.addListener(function(){
+    chrome.tabs.query({active:true,currentWindow:true},function(tabs){
+        background.service.takeThisUrlIntoConsider(tabs[0].url);
+    });
+});
 
 
 

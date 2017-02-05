@@ -14,6 +14,8 @@
     "bookmarks",
     "proxy",
     "webRequest",
+    "webRequestBlocking",
+    "contextMenus",
     "storage",
     "debugger" ,
     "http://*/*", "https://*/*", "ftp://*/*",
@@ -29,7 +31,6 @@
           "matches": [ "http://*/*", "https://*/*" ],
           "run_at": "document_start"
    } ],
-
 
    "web_accessible_resources": [
       "includeme.js",
