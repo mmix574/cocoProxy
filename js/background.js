@@ -139,6 +139,15 @@ chrome.webRequest.onBeforeRequest.addListener(
 
 	},["blocking"]);
 
+chrome.webRequest.onBeforeSendHeaders.addListener(
+    function(details) {
+        if(details.type=="main_frame"){
+            background.service.takeThisUrlIntoConsider(details.url);
+        }
+    }, {
+        urls: ["<all_urls>"]
+
+    },["blocking"]);
 
 //tab点击切换
 chrome.tabs.onActiveChanged.addListener(function(){
