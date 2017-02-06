@@ -165,6 +165,34 @@ function tab_status(){
     });
 }
 
-function test(){
-
+function backgroundtest(){
+	var xhttp = new XMLHttpRequest();
+	xhttp.onreadystatechange = function(){
+		if(this.readyState==4&&this.status==200){
+			console.log(xhttp.responseText);
+		}
+	};
+	xhttp.open("GET","http://www.baidu.com",true);
+	xhttp.send();
 }
+
+
+searchUrbanDict = function(word){
+    var query = word.selectionText;
+    chrome.tabs.create({url: "http://www.urbandictionary.com/define.php?term=" + query});
+};
+
+chrome.contextMenus.create({
+    title: "Proxy Setting",
+    contexts:["page"],  // ContextType
+    onclick: function(){
+        console.log("you click me ");
+        alert("clicked");
+    }
+});
+
+chrome.windows.onFocusChanged.addListener(function(windowId){
+    chrome.tabs.query({active:true,currentWindow:true},function(tabs){
+        background.service.takeThisUrlIntoConsider(tabs[0].url);
+    });
+});

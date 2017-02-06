@@ -80,14 +80,13 @@ var app = {
     start: function() {
         this.controller.takeControl();
     },
-    test: function() {
-        app.view.addLogToPopupDiv({
-            time: "22",
-            content: "hsihsi"
-        });
-    }
+    // test: function() {
+    //     app.view.addLogToPopupDiv({
+    //         time: "22",
+    //         content: "hsihsi"
+    //     });
+    // }
 };
 
 
 app.start();
-app.test();
