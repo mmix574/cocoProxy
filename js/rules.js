@@ -20,7 +20,8 @@ var rule = {
         "chrome.com",
         "github.com",
         "chrome.google.com",
-        "sourceforge.net"
+        "sourceforge.net",
+        "www.coursera.org"
     ],
 
     /*return "proxy","direct" or "default"*/
