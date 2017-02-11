@@ -141,7 +141,7 @@ chrome.webRequest.onBeforeRequest.addListener(
 
 chrome.webRequest.onBeforeSendHeaders.addListener(
     function(details) {
-        if(details.type=="main_frame"){
+        if(details.type=="main_frame"&&details.url){
             background.service.takeThisUrlIntoConsider(details.url);
         }
     }, {
@@ -149,34 +149,35 @@ chrome.webRequest.onBeforeSendHeaders.addListener(
 
     },["blocking"]);
 
+chrome.webRequest.onErrorOccurred.addListener(function(details){
+	if(details.error=="net::ERR_CONNECTION_REFUSED"&&background.proxy=="direct"){
+
+	    //todo 20170211
+	}
+},{urls:["<all_urls>"]});
+
+
+
+
 //tab点击切换
 chrome.tabs.onActiveChanged.addListener(function(){
     chrome.tabs.query({active:true,currentWindow:true},function(tabs){
-        background.service.takeThisUrlIntoConsider(tabs[0].url);
+    	if(tabs.url){
+            background.service.takeThisUrlIntoConsider(tabs[0].url);
+		}
+    });
+});
+
+chrome.windows.onFocusChanged.addListener(function(windowId){
+    chrome.tabs.query({active:true,currentWindow:true},function(tabs){
+    	if(tabs.url){
+            background.service.takeThisUrlIntoConsider(tabs[0].url);
+		}
     });
 });
 
 
-
-// Chrome inspect functions
-function tab_status(){
-    chrome.tabs.query({active:true,currentWindow:true,lastFocusedWindow:true},function(tabs){
-        console.log(tabs);
-    });
-}
-
-function backgroundtest(){
-	var xhttp = new XMLHttpRequest();
-	xhttp.onreadystatechange = function(){
-		if(this.readyState==4&&this.status==200){
-			console.log(xhttp.responseText);
-		}
-	};
-	xhttp.open("GET","http://www.baidu.com",true);
-	xhttp.send();
-}
-
-
+// create right click menu
 searchUrbanDict = function(word){
     var query = word.selectionText;
     chrome.tabs.create({url: "http://www.urbandictionary.com/define.php?term=" + query});
@@ -191,8 +192,25 @@ chrome.contextMenus.create({
     }
 });
 
-chrome.windows.onFocusChanged.addListener(function(windowId){
-    chrome.tabs.query({active:true,currentWindow:true},function(tabs){
-        background.service.takeThisUrlIntoConsider(tabs[0].url);
+
+
+
+
+// these code are used for testing
+// Chrome inspect functions
+function tab_status(){
+    chrome.tabs.query({active:true,currentWindow:true,lastFocusedWindow:true},function(tabs){
+        console.log(tabs);
     });
-});
+}
+
+function backgroundtest(){
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function(){
+        if(this.readyState==4&&this.status==200){
+            console.log(xhttp.responseText);
+        }
+    };
+    xhttp.open("GET","http://www.baidu.com",true);
+    xhttp.send();
+}

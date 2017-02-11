@@ -3,6 +3,7 @@
  */
 
 var rule = {
+    timeout:1000,//if not receive in 1000 ms ,switch to another proxy mode;
     direct_url:[
         "www.baidu.com",
         "bilibili.com",
