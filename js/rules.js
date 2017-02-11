@@ -7,7 +7,7 @@ var rule = {
     direct_url:[
         "www.baidu.com",
         "bilibili.com",
-        "www.taobao.com",
+        "taobao.com",
         "zhihu.com",
         "jd.com",
         "dangdang.com",
@@ -22,7 +22,8 @@ var rule = {
         "github.com",
         "chrome.google.com",
         "sourceforge.net",
-        "www.coursera.org"
+        "www.coursera.org",
+        "kanbanflow.com"
     ],
 
     /*return "proxy","direct" or "default"*/
