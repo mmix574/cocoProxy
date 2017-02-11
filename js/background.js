@@ -162,7 +162,7 @@ chrome.webRequest.onErrorOccurred.addListener(function(details){
 //tab点击切换
 chrome.tabs.onActiveChanged.addListener(function(){
     chrome.tabs.query({active:true,currentWindow:true},function(tabs){
-    	if(tabs.url){
+    	if(tabs[0].url){
             background.service.takeThisUrlIntoConsider(tabs[0].url);
 		}
     });
@@ -170,7 +170,7 @@ chrome.tabs.onActiveChanged.addListener(function(){
 
 chrome.windows.onFocusChanged.addListener(function(windowId){
     chrome.tabs.query({active:true,currentWindow:true},function(tabs){
-    	if(tabs.url){
+    	if(tabs[0].url){
             background.service.takeThisUrlIntoConsider(tabs[0].url);
 		}
     });
