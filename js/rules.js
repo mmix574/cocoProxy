@@ -13,7 +13,13 @@ var rule = {
         "dangdang.com",
         "www.tuicool.com",
         "nowcoder.com",
-        "www.sogou.com"
+        "www.sogou.com",
+        "www.patest.cn",
+        "163.com",
+        "funshow.jnu.edu.cn",
+        "tieba.baidu.com",
+        "baidu.com",
+        "jnu.edu.cn"
     ],
     proxy_url:["google",
         "ip.cn",
@@ -23,7 +29,8 @@ var rule = {
         "chrome.google.com",
         "sourceforge.net",
         "www.coursera.org",
-        "kanbanflow.com"
+        "kanbanflow.com",
+        "tensorflow.org"
     ],
 
     /*return "proxy","direct" or "default"*/
