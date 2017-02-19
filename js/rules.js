@@ -19,7 +19,9 @@ var rule = {
         "funshow.jnu.edu.cn",
         "tieba.baidu.com",
         "baidu.com",
-        "jnu.edu.cn"
+        "jnu.edu.cn",
+        "www.cskaoyan.com",
+        "192.168.252.254"
     ],
     proxy_url:["google",
         "ip.cn",
@@ -48,6 +50,7 @@ var rule = {
         return "default";
     }
 };
+
 var urltest = function(url){
     console.log(rule.getProxyMethod(url));
 }
