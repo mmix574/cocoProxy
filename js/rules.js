@@ -34,7 +34,8 @@ var rule = {
         "sourceforge.net",
         "www.coursera.org",
         "kanbanflow.com",
-        "tensorflow.org"
+        "tensorflow.org",
+        "stackoverflow.com"
     ],
 
     /*return "proxy","direct" or "default"*/
