@@ -22,7 +22,8 @@ var rule = {
         "jnu.edu.cn",
         "www.cskaoyan.com",
         "192.168.252.254",
-        "www.jianshu.com"
+        "www.jianshu.com",
+        "wx.qq.com"
     ],
     proxy_url:["google",
         "ip.cn",
