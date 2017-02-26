@@ -35,7 +35,8 @@ var rule = {
         "www.coursera.org",
         "kanbanflow.com",
         "tensorflow.org",
-        "stackoverflow.com"
+        "stackoverflow.com",
+        "jsbin.com"
     ],
 
     /*return "proxy","direct" or "default"*/
