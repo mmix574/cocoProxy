@@ -23,7 +23,8 @@ var rule = {
         "www.cskaoyan.com",
         "192.168.252.254",
         "www.jianshu.com",
-        "wx.qq.com"
+        "wx.qq.com",
+        "localhost"
     ],
     proxy_url:["google",
         "ip.cn",
