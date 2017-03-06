@@ -37,7 +37,8 @@ var rule = {
         "kanbanflow.com",
         "tensorflow.org",
         "stackoverflow.com",
-        "jsbin.com"
+        "jsbin.com",
+        "mail.qq.com"
     ],
 
     /*return "proxy","direct" or "default"*/
