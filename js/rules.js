@@ -24,7 +24,8 @@ var rule = {
         "192.168.252.254",
         "www.jianshu.com",
         "wx.qq.com",
-        "localhost"
+        "localhost",
+        "mail.qq.com"
     ],
     proxy_url:["google",
         "ip.cn",
@@ -38,7 +39,7 @@ var rule = {
         "tensorflow.org",
         "stackoverflow.com",
         "jsbin.com",
-        "mail.qq.com"
+        "doc.scrapy.org"
     ],
 
     /*return "proxy","direct" or "default"*/
