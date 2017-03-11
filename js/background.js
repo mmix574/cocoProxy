@@ -1,8 +1,8 @@
 var background = {
 	proxy: "direct", //default_value
-	is_auto:false,
+	is_auto: false,
 	logs: [],
-    tabs:[],
+	tabs: [],
 	proxyController: {},
 	bookmarkController: {},
 	networkController: {},
@@ -27,32 +27,32 @@ var background = {
 		}
 		this.loadOtherController();
 	},
-    service:{
-        proxyModeChangeService:function(way){
-            if(way=="direct"||way=="proxy"){
-                background.proxy = way;
-                common.changePopupIcon(background.proxy);
-                background.proxyController.changeProxyMode(background.proxy, function() {
-                    console.log("Proxy Mode Change to " +  background.proxy);
-                });
-            }
-        },
-		takeThisUrlIntoConsider:function(url){
-            var way = rule.getProxyMethod(url);
-            if(way=="direct"||way=="proxy"){
-                background.service.proxyModeChangeService(way);
-			}else{
-            	console.log("default proxy mode calling .."+url);
+	service: {
+		proxyModeChangeService: function(way) {
+			if (way == "direct" || way == "proxy") {
+				background.proxy = way;
+				common.changePopupIcon(background.proxy);
+				background.proxyController.changeProxyMode(background.proxy, function() {
+					console.log("Proxy Mode Change to " + background.proxy);
+				});
+			}
+		},
+		takeThisUrlIntoConsider: function(url) {
+			var way = rule.getProxyMethod(url);
+			if (way == "direct" || way == "proxy") {
+				background.service.proxyModeChangeService(way);
+			} else {
+				console.log("default proxy mode calling .." + url);
 			}
 		}
 
-    },
+	},
 	interface: {
 		onload: {},
-		ondepart: {},
-		job: {}
+			ondepart: {},
+			job: {}
 	},
-	fn:{
+	fn: {
 		//Message Calling
 		setProxy: function(request, sender, sendResponse) {
 			background.proxy = request.proxy;
@@ -78,15 +78,18 @@ var background = {
 	start: function() {
 		this.init();
 	},
-	loadPerference: function() {
-		chrome.storage.local.get("proxy", function(items) {
-		    if(items.proxy){
-                background.proxy = items.proxy;
-            }
-			background.proxyController.changeProxyMode(background.proxy);
-			common.changePopupIcon(background.proxy);
-			console.log("proxy mode loaded: " + background.proxy);
-		});
+	loadPerference: function(time) {
+		background.proxyController.changeProxyMode("direct");
+		setTimeout(function() {
+			chrome.storage.local.get("proxy", function(items) {
+				if (items.proxy) {
+					background.proxy = items.proxy;
+				}
+				background.proxyController.changeProxyMode(background.proxy);
+				common.changePopupIcon(background.proxy);
+				console.log("proxy mode loaded: " + background.proxy);
+			});
+		}, time);
 	},
 	savePerference: function() {
 		chrome.storage.local.set({
@@ -115,12 +118,12 @@ var front = {
 };
 
 background.interface.onload = function() {
-	background.loadPerference();
+	background.loadOtherController();
+	background.loadPerference(2000);
 }
 background.interface.ondepart = function() {
 	background.savePerference();
 }
-
 
 
 
@@ -131,86 +134,97 @@ background.start();
 
 chrome.webRequest.onBeforeRequest.addListener(
 	function(details) {
-        if(details.type=="main_frame"){
+		if (details.type == "main_frame") {
 			background.service.takeThisUrlIntoConsider(details.url);
-        }
+		}
 	}, {
 		urls: ["<all_urls>"]
 
-	},["blocking"]);
+	}, ["blocking"]);
 
 chrome.webRequest.onBeforeSendHeaders.addListener(
-    function(details) {
-        if(details.type=="main_frame"&&details.url){
-            background.service.takeThisUrlIntoConsider(details.url);
-        }
-    }, {
-        urls: ["<all_urls>"]
+	function(details) {
+		if (details.type == "main_frame" && details.url) {
+			background.service.takeThisUrlIntoConsider(details.url);
+		}
+	}, {
+		urls: ["<all_urls>"]
 
-    },["blocking"]);
+	}, ["blocking"]);
 
-chrome.webRequest.onErrorOccurred.addListener(function(details){
-	if(details.error=="net::ERR_CONNECTION_REFUSED"&&background.proxy=="direct"){
+chrome.webRequest.onErrorOccurred.addListener(function(details) {
+	if (details.error == "net::ERR_CONNECTION_REFUSED" && background.proxy == "direct") {
 
-	    //todo 20170211
+		//todo 20170211
 	}
-},{urls:["<all_urls>"]});
-
+}, {
+	urls: ["<all_urls>"]
+});
 
 
 
 //tab点击切换
-chrome.tabs.onActiveChanged.addListener(function(){
-    chrome.tabs.query({active:true,currentWindow:true},function(tabs){
-    	if(tabs[0].url){
-            background.service.takeThisUrlIntoConsider(tabs[0].url);
+chrome.tabs.onActiveChanged.addListener(function() {
+	chrome.tabs.query({
+		active: true,
+		currentWindow: true
+	}, function(tabs) {
+		if (tabs[0].url) {
+			background.service.takeThisUrlIntoConsider(tabs[0].url);
 		}
-    });
+	});
 });
 
-chrome.windows.onFocusChanged.addListener(function(windowId){
-    chrome.tabs.query({active:true,currentWindow:true},function(tabs){
-    	if(tabs[0].url){
-            background.service.takeThisUrlIntoConsider(tabs[0].url);
+chrome.windows.onFocusChanged.addListener(function(windowId) {
+	chrome.tabs.query({
+		active: true,
+		currentWindow: true
+	}, function(tabs) {
+		if (tabs[0].url) {
+			background.service.takeThisUrlIntoConsider(tabs[0].url);
 		}
-    });
+	});
 });
 
 
 // create right click menu
-searchUrbanDict = function(word){
-    var query = word.selectionText;
-    chrome.tabs.create({url: "http://www.urbandictionary.com/define.php?term=" + query});
+searchUrbanDict = function(word) {
+	var query = word.selectionText;
+	chrome.tabs.create({
+		url: "http://www.urbandictionary.com/define.php?term=" + query
+	});
 };
 
 chrome.contextMenus.create({
-    title: "Proxy Setting",
-    contexts:["page"],  // ContextType
-    onclick: function(){
-        console.log("you click me ");
-        alert("clicked");
-    }
+	title: "Proxy Setting",
+	contexts: ["page"], // ContextType
+	onclick: function() {
+		console.log("you click me ");
+		alert("clicked");
+	}
 });
-
-
 
 
 
 // these code are used for testing
 // Chrome inspect functions
-function tab_status(){
-    chrome.tabs.query({active:true,currentWindow:true,lastFocusedWindow:true},function(tabs){
-        console.log(tabs);
-    });
+function tab_status() {
+	chrome.tabs.query({
+		active: true,
+		currentWindow: true,
+		lastFocusedWindow: true
+	}, function(tabs) {
+		console.log(tabs);
+	});
 }
 
-function backgroundtest(){
-    var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function(){
-        if(this.readyState==4&&this.status==200){
-            console.log(xhttp.responseText);
-        }
-    };
-    xhttp.open("GET","http://www.baidu.com",true);
-    xhttp.send();
+function backgroundtest() {
+	var xhttp = new XMLHttpRequest();
+	xhttp.onreadystatechange = function() {
+		if (this.readyState == 4 && this.status == 200) {
+			console.log(xhttp.responseText);
+		}
+	};
+	xhttp.open("GET", "http://www.baidu.com", true);
+	xhttp.send();
 }
