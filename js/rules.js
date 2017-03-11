@@ -40,7 +40,8 @@ var rule = {
         "tensorflow.org",
         "stackoverflow.com",
         "jsbin.com",
-        "doc.scrapy.org"
+        "doc.scrapy.org",
+        "leetcode.com"
     ],
 
     /*return "proxy","direct" or "default"*/
