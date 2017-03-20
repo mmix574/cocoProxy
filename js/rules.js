@@ -41,7 +41,8 @@ var rule = {
         "stackoverflow.com",
         "jsbin.com",
         "doc.scrapy.org",
-        "getpocket.com"
+        "getpocket.com",
+        "leetcode.com"
     ],
 
     /*return "proxy","direct" or "default"*/
