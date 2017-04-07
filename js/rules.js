@@ -42,7 +42,9 @@ var rule = {
         "jsbin.com",
         "doc.scrapy.org",
         "getpocket.com",
-        "leetcode.com"
+        "leetcode.com",
+        "www.vultr.com",
+        "www.typing.com"
     ],
 
     /*return "proxy","direct" or "default"*/
