@@ -44,7 +44,8 @@ var rule = {
         "getpocket.com",
         "leetcode.com",
         "www.vultr.com",
-        "www.typing.com"
+        "www.typing.com",
+        "docs.djangoproject.com"
     ],
 
     /*return "proxy","direct" or "default"*/
