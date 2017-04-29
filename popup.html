@@ -2,53 +2,55 @@
 <html lang="en">
 <head>
 	<title>cocoProxy</title>
-	<link rel="stylesheet" href="css/popup.css">
-	<link rel="stylesheet" href="css/toggle-switch.css">
-	<link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/materialize.min.css">
 </head>
+
+<style type="text/css">
+	*{
+		font-family: "Microsoft YaHei",Arial,Helvetica,sans-serif;
+	}
+	body{
+
+	}
+	#body-fix{
+		background-color: #EEEEEE;
+		padding: 0;
+		margin: 0;
+		width: 230px;
+	}
+	.button-warrper{
+		text-align: center;
+		padding: 5px;
+	}
+	button:focus{
+		outline: none;
+	}
+/*	.btn_selected{
+		background-color: #5cb85c;
+	}*/
+	.l-spacing{
+		height: 45px;
+	}
+</style>
 
 <body>
     <div id="body-fix">
         <div id = "div-spacing-maker" style="padding-top: 8px;">
             <div class = "l-spacing">
                 <div class ="button-warrper" >
-                    <button class="btn proxyBtn" id="direct">Direct</button>
+                    <button class="btn proxyBtn  red lighten-1  waves-effect waves-light btn" id="direct">Direct</button>
                 </div>
             </div>
             <div class = "l-spacing">
                 <div class ="button-warrper">
-                    <button class="btn proxyBtn" id="proxy">Proxy</button>
+                    <button class="btn proxyBtn   tail lighten-1  waves-effect waves-light btn" id="proxy">Proxy </button>
                 </div>
             </div>
-            <!-- <div class = "l-spacing" style="text-align: center;">
-                <div><font>Auto:</font></div>
-                <div>
-                    <label class="switch">
-                      <input type="checkbox">
-                      <div class="slider round"></div>
-                    </label>
-                </div>
-
-            </div> -->
+            <div class="l-spacing" style="text-align: center;padding-top: 10px;">
+			      <input class="filled-in" type="checkbox" id="lock-input" />
+			      <label for="lock-input">Lock</label>
+            </div>
         </div>
-
-        <!-- <div class="console" style="border-radius: 2px;height: 160px;border-radius: 10px;text-align:center;">
-            <div id="console" style="background-color: #ffffff;width: 96%;height: 100%;margin:auto;border-radius: 4px;opacity: 0.8;text-align: left;padding-left: 2px;overflow-y: scroll;">
-                <div class="message">
-                        <div class="time">
-                            <font style="font-size: 12px;color: black">
-                            [下午10:20:34]:
-                            </font>
-                        </div>
-                        <div>
-                        <font style="font-size: 10px">content...
-                            backEnd:JAVA JSP Servlet JUnit
-                            Maven Spring Spring MVC Mybatis Thymeleaf
-                            MariaDB</font>
-                        </div>
-                </div>
-            </div>
-        </div> -->
     </div>
 </body>
 </html>
@@ -58,4 +60,5 @@
 <script type="text/javascript" src="js/common.js"></script>
 <script type="text/javascript" src="js/popup-fix.js"></script>
 <script type="text/javascript" src="js/popup.js"></script>
-
+<script type="text/javascript" src="js/lib/jquery-3.1.1.js"></script>
+<script type="text/javascript" src="js/lib/materialize.min.js"></script>
