@@ -45,7 +45,8 @@ var rule = {
         "leetcode.com",
         "www.vultr.com",
         "www.typing.com",
-        "docs.djangoproject.com"
+        "docs.djangoproject.com",
+        "jp.myav.tv"
     ],
 
     /*return "proxy","direct" or "default"*/
