@@ -26,7 +26,9 @@ var rule = {
         "wx.qq.com",
         "localhost",
         "cas.dgut.edu.cn",
-        "mail.qq.com"
+        "mail.qq.com",
+        "192.168",
+        "snapflow.xyz"
     ],
     proxy_url:["google",
         "ip.cn",
@@ -46,7 +48,8 @@ var rule = {
         "www.vultr.com",
         "www.typing.com",
         "docs.djangoproject.com",
-        "jp.myav.tv"
+        "jp.myav.tv",
+        "www.kaggle.com"
     ],
 
     /*return "proxy","direct" or "default"*/
