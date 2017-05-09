@@ -49,7 +49,8 @@ var rule = {
         "www.typing.com",
         "docs.djangoproject.com",
         "jp.myav.tv",
-        "www.kaggle.com"
+        "www.kaggle.com",
+        "matplotlib.org"
     ],
 
     /*return "proxy","direct" or "default"*/
